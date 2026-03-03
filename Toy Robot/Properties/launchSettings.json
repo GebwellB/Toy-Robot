@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "Toy_Robot": {
+      "commandName": "MsixPackage"
+    }
+  }
+}

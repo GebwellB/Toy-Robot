@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="Toy_Robot.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Toy_Robot"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Padding="50">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+
+        <Border BorderBrush="White"
+                BorderThickness="2"
+                Padding="10"
+                Width="300"
+                HorizontalAlignment="Center">
+
+            <TextBlock x:Name="gridContext"
+                       Text="Robot Grid"
+                       FontSize="20"
+                       TextWrapping="Wrap"
+                       TextLineBounds="Full"
+                       HorizontalAlignment="Center"
+                       Grid.Row="0"/>
+
+        </Border>
+        
+        <TextBox x:Name="robotMovement"
+             PlaceholderText="Which direction should the robot go?"
+             KeyDown="robotMovement_KeyDown"
+             Width="300"
+             Margin="0,10,0,10"
+             Grid.Row="1"
+             HorizontalAlignment="Center"/>
+
+        <Button x:Name="spawnRobot"
+            Content="Spawn Robot"
+            Click="spawnRobot_Click"
+            Width="300"
+            Grid.Row="2"
+            HorizontalAlignment="Center"/>
+
+        <Button x:Name="automateRobot"
+                Content="Check Debug Log, follows pre-set instructions"
+                Click="automateRobot_Click"
+                Width="300"
+                Grid.Row="3"
+                HorizontalAlignment="Center"/>
+
+    </Grid>
+</Page>
+
+    
