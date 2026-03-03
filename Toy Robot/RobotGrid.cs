@@ -127,29 +127,41 @@ namespace Toy_Robot
             return "How did you even get here?";
         }
 
+        /// <summary>
+        /// Rotates the robot left or right, based on input. Accepts 'left' or 'right' as input.
+        /// </summary>
+        /// <param name="robot"></param>
+        /// <param name="turnedDirection"></param>
+        /// <returns></returns>
         public string RotateRobot(Robot robot, string turnedDirection)
         {
             string currentFacingDirection = robot.facingDirection.ToLower();
             string parsedFacingDirection = turnedDirection.ToLower();
             string newFacingDirection = "";
+            bool validFacing = false;
 
+            // God these if statements are so fking messy. If I get time, I'll come back and refactor them, but right now, it's "get it to work"
             if (turnedDirection == "left")
             {
                 if(currentFacingDirection == "north")
                 {
                     newFacingDirection = "west";
+                    validFacing = true;
                 }
                 else if(currentFacingDirection == "west")
                 {
                     newFacingDirection = "south";
+                    validFacing = true;
                 }
                 else if (currentFacingDirection == "south")
                 {
                     newFacingDirection = "east";
+                    validFacing = true;
                 }
                 else if (currentFacingDirection == "east")
                 {
                     newFacingDirection = "north";
+                    validFacing = true;
                 }
                 else
                 {
@@ -161,18 +173,22 @@ namespace Toy_Robot
                 if (currentFacingDirection == "north")
                 {
                     newFacingDirection = "east";
+                    validFacing = true;
                 }
                 else if (currentFacingDirection == "east")
                 {
                     newFacingDirection = "south";
+                    validFacing = true;
                 }
                 else if (currentFacingDirection == "south")
                 {
                     newFacingDirection = "west";
+                    validFacing = true;
                 }
                 else if (currentFacingDirection == "west")
                 {
                     newFacingDirection = "north";
+                    validFacing = true;
                 }
                 else
                 {
@@ -182,11 +198,18 @@ namespace Toy_Robot
             else
             {
                 Debug.WriteLine($"'{turnedDirection}' is not a valid direction to turn. Accepts only: 'left' or 'right'");
+                return $"'{turnedDirection}' is not a valid direction to turn. Accepts only: 'left' or 'right'";
             }
 
-            robot.facingDirection = newFacingDirection;
-            Debug.WriteLine($"Successfully Rotated the robot to the {parsedFacingDirection}. It is now facing: {robot.facingDirection}");
-            return $"Successfully Rotated the robot to the {parsedFacingDirection}. It is now facing: {robot.facingDirection}";
+            if (validFacing)
+            {
+                robot.facingDirection = newFacingDirection;
+                Debug.WriteLine($"Successfully Rotated the robot to the {parsedFacingDirection}. It is now facing: {robot.facingDirection}");
+                return $"Successfully Rotated the robot to the {parsedFacingDirection}. It is now facing: {robot.facingDirection}";
+            }
+
+            // This should be impossible to get to... I think.
+            return "How did you even get here?";
         }
     }
 }
