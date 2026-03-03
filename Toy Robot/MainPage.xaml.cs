@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using Windows.UI.Xaml.Controls;
 
 namespace Toy_Robot
@@ -62,6 +64,31 @@ namespace Toy_Robot
         {
             //Spawn a fresh Robot, seperate to the one controlled via the GUI
             Robot automatedRobot = new Robot((0, 0), "north");
+
+            // Same thing with the grid, make a fresh one seperate from the GUI
+            RobotGrid automatedGrid = new RobotGrid();
+
+            // Making a list with 4 valid moves and 2 invalid - so when I call it randomly, the robot will do a little shuffle
+            List<string> randomDirectionList = new List<string>() {"north", "south", "east", "west", "banana", "apple" };
+            Random randInt = new Random();
+
+            #region Test movement and end-of-grid checks
+            for (int i = 0; i < 200; i++)
+            {
+                int randomDirection = randInt.Next(6);
+
+                automatedGrid.MoveByCompassDirection(automatedRobot, randomDirectionList[randomDirection]);
+            }
+
+            Debug.WriteLine("\n============\n");
+
+            #endregion
+
+            #region Test rotating the robot
+
+
+
+            #endregion
         }
     }
 }

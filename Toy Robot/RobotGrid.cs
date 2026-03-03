@@ -35,7 +35,7 @@ namespace Toy_Robot
         }
 
         /// <summary>
-        /// Moves the robot by taking a string based on the direction, this checks if the move is valid before moving the robot
+        /// Moves the robot by taking a string based on the direction, this checks if the move is valid before moving the robot.
         /// </summary>
         /// <param name="robot"></param>
         /// <param name="direction"></param>
@@ -111,13 +111,15 @@ namespace Toy_Robot
             }
             else
             {
-                return "Invalid move. Can only accept: 'north', 'south', 'east' or 'west'";
+                Debug.WriteLine($"Invalid move '{direction}'. Can only accept: 'north', 'south', 'east' or 'west'");
+                return $"Invalid move '{direction}'. Can only accept: 'north', 'south', 'east' or 'west'";
             }
 
             if (validMove)
             {
                 robot.position = (newXpos, newYpos);
-                return $"Moved {directionOfMove}!";
+                robot.facingDirection = directionOfMove;
+                return $"Moved {directionOfMove}! Now facing: {robot.facingDirection}";
             }
 
             // This should be impossible to get to... I think.
