@@ -129,17 +129,19 @@ namespace Toy_Robot
 
             #region Example Input / Outputs
 
+            Debug.WriteLine("Example Testing:\n");
+
             // Example A:
             Robot exampleARobot = new Robot((0,0), "north");
             Debug.WriteLine(exampleARobot.report);
             automatedGrid.MoveRobotByMoveCommand(exampleARobot, "move");
-            Debug.WriteLine(exampleARobot.report);
+            Debug.WriteLine(exampleARobot.report + "\n");
 
             // Example B:
             Robot exampleBRobot = new Robot((0, 0), "north");
             Debug.WriteLine(exampleBRobot.report);
             automatedGrid.RotateRobot(exampleBRobot, "left");
-            Debug.WriteLine(exampleBRobot.report);
+            Debug.WriteLine(exampleBRobot.report + "\n");
 
             // Example C:
             Robot exampleCRobot = new Robot((1, 2), "east");
@@ -148,7 +150,7 @@ namespace Toy_Robot
             automatedGrid.MoveRobotByMoveCommand(exampleCRobot, "move");
             automatedGrid.RotateRobot(exampleCRobot, "left");
             automatedGrid.MoveRobotByMoveCommand(exampleCRobot, "move");
-            Debug.WriteLine(exampleCRobot.report);
+            Debug.WriteLine(exampleCRobot.report + "\n");
 
             Debug.WriteLine("\n============\n");
 
