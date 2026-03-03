@@ -11,6 +11,15 @@ namespace Toy_Robot
 
         public string? facingDirection { get; set; }
 
+        public string report
+        {
+            get
+            {
+                string returnString = $"Robot's current positon: {position.ToString()}, Facing Direction: {facingDirection}";
+                return returnString;
+            }
+        }
+
         /// <summary>
         /// Constructs a robot object to be placed on the grid.
         /// </summary>

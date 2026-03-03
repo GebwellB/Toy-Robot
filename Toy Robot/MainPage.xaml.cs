@@ -62,6 +62,7 @@ namespace Toy_Robot
         // This follows a set of instructions set by the requirements. It doesn't allow direct user control as it takes no arguments, but can easily be changed to suit. I simply just didn't have enough time to implement input fields correctly
         private void automateRobot_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            #region Variables / setup tasks
             //Spawn a fresh Robot, seperate to the one controlled via the GUI
             Robot automatedRobot = new Robot((0, 0), "north");
 
@@ -73,28 +74,81 @@ namespace Toy_Robot
 
             // This is a random rotational list, to test left / right and invalid rotations
             List<string> randomRotationList = new List<string>() { "left", "right", "banana", "cheese" };
+
+            // This is a random "movement" list, to test move command and random words thrown into it
+            List<string> randomMovementList = new List<string>() { "move", "right", "banana" };
             Random randInt = new Random();
 
+            Debug.WriteLine("\n============\n");
+
+            #endregion
+
             #region Test movement and end-of-grid checks
+            Debug.WriteLine("Testing movement and end of grid checks");
             for (int i = 0; i < 20; i++)
             {
                 int randomDirection = randInt.Next(6);
 
                 automatedGrid.MoveByCompassDirection(automatedRobot, randomDirectionList[randomDirection]);
             }
+            Debug.WriteLine(automatedRobot.report);
 
             Debug.WriteLine("\n============\n");
 
             #endregion
 
             #region Test rotating the robot
-
+            Debug.WriteLine("Testing rotating the robot on the spot");
             for (int i = 0; i < 20; i++)
             {
                 int randomDirection = randInt.Next(4);
 
                 automatedGrid.RotateRobot(automatedRobot, randomRotationList[randomDirection]);
             }
+            Debug.WriteLine(automatedRobot.report);
+
+            Debug.WriteLine("\n============\n");
+
+            #endregion
+
+            #region Move testing (with rotate)
+            Debug.WriteLine("Testing 'move' command (with random rotating)");
+            for (int i = 0; i < 20; i++)
+            {
+                int randomDirection = randInt.Next(4);
+                int randomMovememnt = randInt.Next(3);
+
+                automatedGrid.RotateRobot(automatedRobot, randomRotationList[randomDirection]);
+                automatedGrid.MoveRobotByMoveCommand(automatedRobot, randomMovementList[randomMovememnt]);
+            }
+            Debug.WriteLine(automatedRobot.report);
+
+            Debug.WriteLine("\n============\n");
+
+            #endregion
+
+            #region Example Input / Outputs
+
+            // Example A:
+            Robot exampleARobot = new Robot((0,0), "north");
+            Debug.WriteLine(exampleARobot.report);
+            automatedGrid.MoveRobotByMoveCommand(exampleARobot, "move");
+            Debug.WriteLine(exampleARobot.report);
+
+            // Example B:
+            Robot exampleBRobot = new Robot((0, 0), "north");
+            Debug.WriteLine(exampleBRobot.report);
+            automatedGrid.RotateRobot(exampleBRobot, "left");
+            Debug.WriteLine(exampleBRobot.report);
+
+            // Example C:
+            Robot exampleCRobot = new Robot((1, 2), "east");
+            Debug.WriteLine(exampleCRobot.report);
+            automatedGrid.MoveRobotByMoveCommand(exampleCRobot, "move");
+            automatedGrid.MoveRobotByMoveCommand(exampleCRobot, "move");
+            automatedGrid.RotateRobot(exampleCRobot, "left");
+            automatedGrid.MoveRobotByMoveCommand(exampleCRobot, "move");
+            Debug.WriteLine(exampleCRobot.report);
 
             Debug.WriteLine("\n============\n");
 

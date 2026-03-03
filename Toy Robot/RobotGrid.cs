@@ -128,6 +128,105 @@ namespace Toy_Robot
         }
 
         /// <summary>
+        /// Accepts only "move", which will move the robot one place in the direction that it is facing
+        /// </summary>
+        /// <param name="robot"></param>
+        /// <param name="direction"></param>
+        /// <returns></returns>
+        public string MoveRobotByMoveCommand(Robot robot, string move)
+        {
+            string parsedDirection = move.ToLower();
+            (int currentXpos, int currentYpos) = robot.position;
+            string currentFacingDirection = robot.facingDirection.ToLower();
+            int newXpos = currentXpos;
+            int newYpos = currentYpos;
+            bool validMove = false;
+            string directionOfMove = "";
+
+            // This is basically a copy of 'MoveByCompassDirection' - I kinda wish I made moving it's own function and then checking direction / positon before this.
+            // Would have saved a whole lot of time. But, again... "Get it working stage..."
+            if (parsedDirection == "move")
+            {
+                if (currentFacingDirection == "north")
+                {
+                    if (gridCoordinates.Contains((currentXpos, currentYpos + 1)))
+                    {
+                        newYpos = currentYpos + 1;
+                        Debug.WriteLine("Moving North!");
+                        validMove = true;
+                        directionOfMove = "North";
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Cannot move North, would fall off the grid!");
+                        return "Cannot move North, would fall off the grid!";
+                    }
+                }
+                else if (currentFacingDirection == "south")
+                {
+                    if (gridCoordinates.Contains((currentXpos, currentYpos - 1)))
+                    {
+                        newYpos = currentYpos - 1;
+                        Debug.WriteLine("Moving South!");
+                        validMove = true;
+                        directionOfMove = "South";
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Cannot move South, would fall off the grid!");
+                        return "Cannot move South, would fall off the grid!";
+                    }
+                }
+                else if (currentFacingDirection == "west")
+                {
+                    if (gridCoordinates.Contains((currentXpos - 1, currentYpos)))
+                    {
+                        newXpos = currentXpos - 1;
+                        Debug.WriteLine("Moving West!");
+                        validMove = true;
+                        directionOfMove = "West";
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Cannot move West, would fall off the grid!");
+                        return "Cannot move West, would fall off the grid!";
+                    }
+                }
+                else if (currentFacingDirection == "east")
+                {
+                    if (gridCoordinates.Contains((currentXpos + 1, currentYpos)))
+                    {
+                        newXpos = currentXpos + 1;
+                        Debug.WriteLine("Moving East!");
+                        validMove = true;
+                        directionOfMove = "East";
+                    }
+                    else
+                    {
+                        Debug.WriteLine("Cannot move East, would fall off the grid!");
+                        return "Cannot move East, would fall off the grid!";
+                    }
+                }
+
+                if (validMove)
+                {
+                    robot.position = (newXpos, newYpos);
+                    robot.facingDirection = directionOfMove;
+                    return $"Moved {directionOfMove}! Now facing: {robot.facingDirection}";
+                }
+
+                // This should be impossible to get to... I think.
+                return "How did you even get here?";
+
+            }
+            else
+            {
+                Debug.WriteLine($"Move command only accepts 'move'");
+                return $"Move command only accepts 'move'";
+            }
+        }
+
+        /// <summary>
         /// Rotates the robot left or right, based on input. Accepts 'left' or 'right' as input.
         /// </summary>
         /// <param name="robot"></param>
