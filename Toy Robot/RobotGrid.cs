@@ -49,6 +49,7 @@ namespace Toy_Robot
             string directionOfMove = "";
 
             // I love me a good long list of if statements. It makes sense in my mind, but this is definetly a "Get it working first" type solution.
+            // I also planned to accept n/s/e/w, but, I never implemented that.
             if (parsedDirection == "north" || parsedDirection == "n")
             {
                 if (gridCoordinates.Contains((currentXpos, currentYpos + 1)))
@@ -126,10 +127,66 @@ namespace Toy_Robot
             return "How did you even get here?";
         }
 
-        public string RotateRobot(Robot robot, string direction)
+        public string RotateRobot(Robot robot, string turnedDirection)
         {
-            // I'll come back to this.
-            return "Yes";
+            string currentFacingDirection = robot.facingDirection.ToLower();
+            string parsedFacingDirection = turnedDirection.ToLower();
+            string newFacingDirection = "";
+
+            if (turnedDirection == "left")
+            {
+                if(currentFacingDirection == "north")
+                {
+                    newFacingDirection = "west";
+                }
+                else if(currentFacingDirection == "west")
+                {
+                    newFacingDirection = "south";
+                }
+                else if (currentFacingDirection == "south")
+                {
+                    newFacingDirection = "east";
+                }
+                else if (currentFacingDirection == "east")
+                {
+                    newFacingDirection = "north";
+                }
+                else
+                {
+                    Debug.WriteLine("Failed to rotate left");
+                }
+            }
+            else if (turnedDirection == "right")
+            {
+                if (currentFacingDirection == "north")
+                {
+                    newFacingDirection = "east";
+                }
+                else if (currentFacingDirection == "east")
+                {
+                    newFacingDirection = "south";
+                }
+                else if (currentFacingDirection == "south")
+                {
+                    newFacingDirection = "west";
+                }
+                else if (currentFacingDirection == "west")
+                {
+                    newFacingDirection = "north";
+                }
+                else
+                {
+                    Debug.WriteLine("Failed to rotate right");
+                }
+            }
+            else
+            {
+                Debug.WriteLine($"'{turnedDirection}' is not a valid direction to turn. Accepts only: 'left' or 'right'");
+            }
+
+            robot.facingDirection = newFacingDirection;
+            Debug.WriteLine($"Successfully Rotated the robot to the {parsedFacingDirection}. It is now facing: {robot.facingDirection}");
+            return $"Successfully Rotated the robot to the {parsedFacingDirection}. It is now facing: {robot.facingDirection}";
         }
     }
 }

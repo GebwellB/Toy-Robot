@@ -70,10 +70,13 @@ namespace Toy_Robot
 
             // Making a list with 4 valid moves and 2 invalid - so when I call it randomly, the robot will do a little shuffle
             List<string> randomDirectionList = new List<string>() {"north", "south", "east", "west", "banana", "apple" };
+
+            // This is a random rotational list, to test left / right and invalid rotations
+            List<string> randomRotationList = new List<string>() { "left", "right", "banana", "cheese" };
             Random randInt = new Random();
 
             #region Test movement and end-of-grid checks
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 20; i++)
             {
                 int randomDirection = randInt.Next(6);
 
@@ -86,7 +89,14 @@ namespace Toy_Robot
 
             #region Test rotating the robot
 
+            for (int i = 0; i < 20; i++)
+            {
+                int randomDirection = randInt.Next(4);
 
+                automatedGrid.RotateRobot(automatedRobot, randomRotationList[randomDirection]);
+            }
+
+            Debug.WriteLine("\n============\n");
 
             #endregion
         }
