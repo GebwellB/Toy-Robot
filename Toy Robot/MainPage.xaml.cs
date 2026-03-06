@@ -51,7 +51,7 @@ namespace Toy_Robot
                         firstRun = false;
                     }
 
-                    string moveResult = grid.MoveByCompassDirection(robot, moveDirection);
+                    string moveResult = grid.MoveRobotByCommand(robot, moveDirection);
                     gridContext.Text += moveResult + "\n";
                 }
 
@@ -89,7 +89,7 @@ namespace Toy_Robot
             {
                 int randomDirection = randInt.Next(6);
 
-                automatedGrid.MoveByCompassDirection(automatedRobot, randomDirectionList[randomDirection]);
+                automatedGrid.MoveRobotByCommand(automatedRobot, randomDirectionList[randomDirection]);
             }
             Debug.WriteLine(automatedRobot.report);
 
@@ -119,7 +119,7 @@ namespace Toy_Robot
                 int randomMovememnt = randInt.Next(3);
 
                 automatedGrid.RotateRobot(automatedRobot, randomRotationList[randomDirection]);
-                automatedGrid.MoveRobotByMoveCommand(automatedRobot, randomMovementList[randomMovememnt]);
+                automatedGrid.MoveRobotByCommand(automatedRobot, randomMovementList[randomMovememnt]);
             }
             Debug.WriteLine(automatedRobot.report);
 
@@ -134,7 +134,7 @@ namespace Toy_Robot
             // Example A:
             Robot exampleARobot = new Robot((0,0), "north");
             Debug.WriteLine(exampleARobot.report);
-            automatedGrid.MoveRobotByMoveCommand(exampleARobot, "move");
+            automatedGrid.MoveRobotByCommand(exampleARobot, "move");
             Debug.WriteLine(exampleARobot.report + "\n");
 
             // Example B:
@@ -146,10 +146,10 @@ namespace Toy_Robot
             // Example C:
             Robot exampleCRobot = new Robot((1, 2), "east");
             Debug.WriteLine(exampleCRobot.report);
-            automatedGrid.MoveRobotByMoveCommand(exampleCRobot, "move");
-            automatedGrid.MoveRobotByMoveCommand(exampleCRobot, "move");
+            automatedGrid.MoveRobotByCommand(exampleCRobot, "move");
+            automatedGrid.MoveRobotByCommand(exampleCRobot, "move");
             automatedGrid.RotateRobot(exampleCRobot, "left");
-            automatedGrid.MoveRobotByMoveCommand(exampleCRobot, "move");
+            automatedGrid.MoveRobotByCommand(exampleCRobot, "move");
             Debug.WriteLine(exampleCRobot.report + "\n");
 
             Debug.WriteLine("\n============\n");
